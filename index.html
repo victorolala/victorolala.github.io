@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Olala - Cloud & Senior Software Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">VO</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#work" class="nav-link">Work</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="theme-toggle-icon sun">☀️</span>
+                        <span class="theme-toggle-icon moon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <span>👋</span> Available for opportunities
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="name-highlight">Victor Olala</span>
+                        <span class="title-sub">Cloud & Senior Software Engineer</span>
+                    </h1>
+                    <p class="hero-description">
+                        Building secure, cloud-native, high-performance systems with 6+ years of experience. 
+                        Expert in distributed systems, microservices, and enterprise software architecture.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">6+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Projects Delivered</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Client Satisfaction</div>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Get In Touch</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="my_cv/Victor_Olala_Senior_Software_Engineer.pdf" download class="btn btn-secondary">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M17.5 12.5V15.8333C17.5 16.2754 17.3244 16.6993 17.0118 17.0118C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V12.5M13.3333 8.33333L10 11.6667M10 11.6667L6.66667 8.33333M10 11.6667V2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Download CV</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <div class="card-header">
+                            <div class="card-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="code-preview">
+                            <div class="code-line">
+                                <span class="code-keyword">const</span> 
+                                <span class="code-var">engineer</span> = {
+                            </div>
+                            <div class="code-line indent">
+                                <span class="code-property">name</span>: 
+                                <span class="code-string">'Victor Olala'</span>,
+                            </div>
+                            <div class="code-line indent">
+                                <span class="code-property">role</span>: 
+                                <span class="code-string">'Senior Software Engineer'</span>,
+                            </div>
+                            <div class="code-line indent">
+                                <span class="code-property">experience</span>: 
+                                <span class="code-number">6+</span> 
+                                <span class="code-comment">// years</span>
+                            </div>
+                            <div class="code-line">};</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="about-content-wrapper">
+                <div class="about-header">
+                    <span class="about-badge">Professional Summary</span>
+                    <h2 class="about-title">
+                        Senior Software Engineer
+                        <span class="about-subtitle">with Technical Lead Experience</span>
+                    </h2>
+                </div>
+                <div class="about-text-content">
+                    <p class="about-paragraph">
+                        Senior Software Engineer with <strong>6+ years of experience</strong> designing and building secure, cloud-native, high-performance systems. 
+                        Strong expertise in <strong>distributed systems, microservices, API-driven architectures</strong>, and enterprise software design.
+                    </p>
+                    <p class="about-paragraph">
+                        Skilled in <strong>AWS, Azure, Kubernetes, Docker, CI/CD</strong>, and DevOps automation. Experienced in <strong>financial modeling, underwriting logic, cash-flow projections</strong>, and interpreting tax documents (1120, 1065, 1040) for lending and risk systems.
+                    </p>
+                    <p class="about-paragraph">
+                        Serves as a <strong>Technical Lead</strong> — guiding architectural decisions, reviewing code, and influencing engineering standards — while remaining hands-on in backend development and cloud engineering.
+                    </p>
+                </div>
+                <div class="about-highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-icon">☁️</div>
+                        <div class="highlight-text">
+                            <h4>Cloud-Native Systems</h4>
+                            <p>Expert in building scalable cloud infrastructure</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🏗️</div>
+                        <div class="highlight-text">
+                            <h4>Technical Leadership</h4>
+                            <p>Guiding architectural decisions & code reviews</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">💰</div>
+                        <div class="highlight-text">
+                            <h4>Financial Systems</h4>
+                            <p>Specialized in lending & risk management</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="section work-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Work</span>
+                <h2 class="section-title">Skills & Experience</h2>
+            </div>
+            
+            <!-- Featured Current Role -->
+            <div class="featured-experience">
+                <div class="featured-card">
+                    <div class="featured-badge">Current Role • 2024</div>
+                    <div class="featured-header">
+                        <div>
+                            <h3 class="featured-title">Technical Lead & Senior Backend Engineer</h3>
+                            <div class="featured-company">PAYSOKO SYSTEMS Inc.</div>
+                        </div>
+                        <div class="featured-meta">
+                            <div class="featured-date">July 2024 - Present</div>
+                            <div class="featured-location">Remote (Nevada, USA)</div>
+                        </div>
+                    </div>
+                    <div class="featured-skills">
+                        <span class="featured-skill">AWS</span>
+                        <span class="featured-skill">Azure</span>
+                        <span class="featured-skill">Kubernetes</span>
+                        <span class="featured-skill">Docker</span>
+                        <span class="featured-skill">Microservices</span>
+                        <span class="featured-skill">CI/CD</span>
+                        <span class="featured-skill">PHP/Laravel</span>
+                        <span class="featured-skill">REST APIs</span>
+                    </div>
+                    <div class="featured-duties">
+                        <div class="duty-item">
+                            <div class="duty-icon">☁️</div>
+                            <p>Architecting cloud-native distributed systems using AWS and Azure</p>
+                        </div>
+                        <div class="duty-item">
+                            <div class="duty-icon">🏗️</div>
+                            <p>Designed microservices for lending, underwriting & repayment engines</p>
+                        </div>
+                        <div class="duty-item">
+                            <div class="duty-icon">💳</div>
+                            <p>Integrated financial platforms: Plaid, Stripe, MPesa, Paystack, Flutterwave</p>
+                        </div>
+                        <div class="duty-item">
+                            <div class="duty-icon">🚀</div>
+                            <p>Led API design, system governance, cloud deployments, and CI/CD pipelines</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Cloud -->
+            <div class="skills-cloud">
+                <div class="skills-cloud-content">
+                    <span class="skill-cloud-tag">PHP/Laravel</span>
+                    <span class="skill-cloud-tag">JavaScript / Vue.js</span>
+                    <span class="skill-cloud-tag">Python (Django)</span>
+                    <span class="skill-cloud-tag">Java/Kotlin</span>
+                    <span class="skill-cloud-tag">AWS</span>
+                    <span class="skill-cloud-tag">Azure</span>
+                    <span class="skill-cloud-tag">Kubernetes</span>
+                    <span class="skill-cloud-tag">Docker</span>
+                    <span class="skill-cloud-tag">REST APIs</span>
+                    <span class="skill-cloud-tag">Microservices</span>
+                    <span class="skill-cloud-tag">CI/CD</span>
+                    <span class="skill-cloud-tag">Git</span>
+                    <span class="skill-cloud-tag">MySQL</span>
+                    <span class="skill-cloud-tag">Nginx</span>
+                </div>
+            </div>
+
+            <!-- Past Experiences Grid -->
+            <div class="past-experiences">
+                <h3 class="past-exp-title">Previous Experience</h3>
+                <div class="experiences-grid">
+                    <div class="exp-card-mini">
+                        <div class="exp-card-mini-header">
+                            <div class="exp-card-mini-year">2022-2024</div>
+                            <div class="exp-card-mini-badge">Senior</div>
+                        </div>
+                        <h4 class="exp-card-mini-title">Full-Stack Senior Developer</h4>
+                        <div class="exp-card-mini-company">AON-MINET KENYA</div>
+                        <div class="exp-card-mini-location">Nairobi, Kenya</div>
+                        <div class="exp-card-mini-skills">
+                            <span>PHP/Laravel</span>
+                            <span>JavaScript</span>
+                            <span>REST APIs</span>
+                            <span>MySQL</span>
+                            <span>Cloud</span>
+                        </div>
+                        <ul class="exp-card-mini-duties">
+                            <li>Built core health insurance systems</li>
+                            <li>Automated insurance operations</li>
+                            <li>Developed Learning Management System</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-card-mini">
+                        <div class="exp-card-mini-header">
+                            <div class="exp-card-mini-year">2021-2022</div>
+                        </div>
+                        <h4 class="exp-card-mini-title">Junior Web Developer</h4>
+                        <div class="exp-card-mini-company">TREASURE CAPITAL LIMITED</div>
+                        <div class="exp-card-mini-location">Nairobi, Kenya</div>
+                        <div class="exp-card-mini-skills">
+                            <span>PHP</span>
+                            <span>JavaScript</span>
+                            <span>MySQL</span>
+                            <span>Web Dev</span>
+                        </div>
+                        <ul class="exp-card-mini-duties">
+                            <li>Developed financial systems & corporate website</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-card-mini">
+                        <div class="exp-card-mini-header">
+                            <div class="exp-card-mini-year">2019-2021</div>
+                        </div>
+                        <h4 class="exp-card-mini-title">Full-Stack Dev & DB Admin</h4>
+                        <div class="exp-card-mini-company">CLOUD APEX SOLUTIONS</div>
+                        <div class="exp-card-mini-location">Nairobi, Kenya</div>
+                        <div class="exp-card-mini-skills">
+                            <span>PHP</span>
+                            <span>Database</span>
+                            <span>APIs</span>
+                            <span>Enterprise</span>
+                        </div>
+                        <ul class="exp-card-mini-duties">
+                            <li>Built enterprise apps, optimized databases, integrated APIs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section education-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Education</span>
+                <h2 class="section-title">Academic Background</h2>
+            </div>
+            <div class="education-grid-modern">
+                <div class="education-card-modern">
+                    <div class="edu-icon">🎓</div>
+                    <h3 class="edu-title">BSc. Information Technology</h3>
+                    <p class="edu-institution">Mt. Kenya University</p>
+                </div>
+                <div class="education-card-modern">
+                    <div class="edu-icon">🌐</div>
+                    <h3 class="edu-title">Cisco Networking Program</h3>
+                    <p class="edu-institution">Mt. Kenya University</p>
+                </div>
+                <div class="education-card-modern">
+                    <div class="edu-icon">💻</div>
+                    <h3 class="edu-title">Software Certification</h3>
+                    <p class="edu-institution">Ahero Technical Training</p>
+                </div>
+                <div class="education-card-modern">
+                    <div class="edu-icon">🏆</div>
+                    <h3 class="edu-title">Google Developer Student Clubs</h3>
+                    <p class="edu-institution">Event Organizer</p>
+                </div>
+                <div class="education-card-modern">
+                    <div class="edu-icon">🚀</div>
+                    <h3 class="edu-title">Nairobi Hackathon</h3>
+                    <p class="edu-institution">Android Developer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Contact</span>
+                <h2 class="section-title">Let's Work Together</h2>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-content-modern">
+                    <p class="contact-intro">
+                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+                    </p>
+                    <div class="contact-grid">
+                        <a href="mailto:olalavictor01@gmail.com" class="contact-card">
+                            <div class="contact-icon-wrapper">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Email</h4>
+                                <p>olalavictor01@gmail.com</p>
+                            </div>
+                        </a>
+                        <a href="tel:+254716311660" class="contact-card">
+                            <div class="contact-icon-wrapper">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7292C21.7209 20.9842 21.5573 21.213 21.3522 21.4008C21.1472 21.5886 20.9053 21.7315 20.6413 21.8207C20.3773 21.9099 20.0971 21.9436 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.19 12.85C3.49997 10.2412 2.44824 7.27099 2.12 4.18C2.09669 3.90347 2.13089 3.62379 2.22049 3.36021C2.31008 3.09663 2.45323 2.85502 2.641 2.65C2.82878 2.44498 3.05758 2.28126 3.31264 2.16945C3.56769 2.05764 3.84336 2.00014 4.12 2H7.12C7.68185 1.99522 8.22799 2.16708 8.67649 2.48851C9.12499 2.80994 9.45373 3.26629 9.62 3.79L10.9 8.07C11.0617 8.58086 11.1352 9.12389 11.1159 9.66747C11.0966 10.2111 10.9849 10.7452 10.787 11.24L9.62 13.71C11.1339 16.2023 13.2977 18.3661 15.79 19.88L18.26 18.71C18.7561 18.5133 19.2912 18.4019 19.8357 18.3826C20.3803 18.3633 20.9234 18.4365 21.43 18.6L25.71 19.88C26.2318 20.0456 26.6855 20.3725 27.0049 20.8192C27.3243 21.2659 27.4942 21.8101 27.49 22.37V25.37C27.4858 25.6481 27.4223 25.9224 27.3038 26.1744C27.1853 26.4264 27.0146 26.6504 26.8031 26.8319C26.5916 27.0134 26.3442 27.1484 26.0771 27.2286C25.81 27.3088 25.5292 27.3323 25.25 27.3C19.82 26.88 14.62 24.89 10.19 21.5C5.49997 17.83 1.99997 12.73 0.189971 7.08C-0.240029 5.65 -0.240029 4.15 0.189971 2.72C0.409971 2.01 0.999971 1.5 1.72997 1.5H4.72997" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Phone</h4>
+                                <p>+2547 16311 660</p>
+                            </div>
+                        </a>
+                        <div class="contact-card">
+                            <div class="contact-icon-wrapper">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Location</h4>
+                                <p>Nairobi, Kenya</p>
+                            </div>
+                        </div>
+                        <a href="https://github.com/victorolala" target="_blank" rel="noopener noreferrer" class="contact-card">
+                            <div class="contact-icon-wrapper">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M15 22V18C15.1392 16.7473 14.78 15.4901 14 14.5C17 14.5 20 12.5 20 9C20.08 7.75 19.73 6.52 19 5.5C19.28 4.35 19.28 3.15 19 2C19 2 18 1.5 16 3C14.36 2.5 12.64 2.5 11 3C9 1.5 8 2 8 2C7.7 3.15 7.7 4.35 8 5.5C7.27189 6.51588 6.91851 7.75279 7 9C7 12.5 10 14.5 13 14.5C12.61 15.1 12.36 15.75 12.25 16.43C12.135 17.15 12.135 17.88 12.25 18.6V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 18C4 20 4 16 2 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="contact-info">
+                                <h4>GitHub</h4>
+                                <p>github.com/victorolala</p>
+                            </div>
+                        </a>
+                        <a href="https://victorolala.github.io" target="_blank" rel="noopener noreferrer" class="contact-card">
+                            <div class="contact-icon-wrapper">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Portfolio</h4>
+                                <p>victorolala.github.io</p>
+                            </div>
+                        </a>
+                        <a href="my_cv/Victor_Olala_Senior_Software_Engineer.pdf" download class="contact-card contact-cv-card">
+                            <div class="contact-icon-wrapper">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Resume</h4>
+                                <p>Download PDF</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Victor Olala. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
