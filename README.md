@@ -103,8 +103,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Victor Olala**
 
-- Portfolio: [olalatheexpert.github.io](https://olalatheexpert.github.io)
-- GitHub: [@OlalaTheExpert](https://github.com/OlalaTheExpert)
+- Portfolio: [victorolala.github.io](https://victorolala.github.io)
+- GitHub: [@victorolala](https://github.com/victorolala)
 - Email: olalavictor01@gmail.com
 - Location: Nairobi, Kenya
 
