@@ -47,37 +47,6 @@ portfolio/
 └── README.md           # This file
 ```
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- A local web server (optional, for development)
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/OlalaTheExpert/portfolio.git
-cd portfolio
-```
-
-2. Open `index.html` in your browser:
-   - Simply double-click the file, or
-   - Use a local server:
-     ```bash
-     # Using Python
-     python -m http.server 8000
-     
-     # Using Node.js (http-server)
-     npx http-server
-     
-     # Using PHP
-     php -S localhost:8000
-     ```
-
-3. Visit `http://localhost:8000` in your browser
-
 ## 🎨 Customization
 
 ### Updating Personal Information
@@ -89,18 +58,6 @@ cd portfolio
 5. **Contact Info**: Update contact details in the Contact section
 6. **CV**: Replace `my_cv/Victor_Olala_Senior_Software_Engineer.pdf` with your CV
 
-### Changing Colors
-
-Edit CSS custom properties in `styles.css`:
-
-```css
-:root {
-    --primary-color: #6366f1;      /* Main brand color */
-    --secondary-color: #8b5cf6;    /* Secondary color */
-    --accent-color: #ec4899;       /* Accent color */
-    /* ... other variables */
-}
-```
 
 ### Adding Sections
 
@@ -117,24 +74,7 @@ Edit CSS custom properties in `styles.css`:
 3. Select source branch (usually `main`)
 4. Your site will be live at `https://username.github.io/portfolio`
 
-### Netlify
 
-1. Drag and drop the folder to [Netlify Drop](https://app.netlify.com/drop)
-2. Or connect your GitHub repository for automatic deployments
-
-### Vercel
-
-1. Install Vercel CLI: `npm i -g vercel`
-2. Run `vercel` in the project directory
-3. Follow the prompts
-
-## 📱 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
 
 ## 🎯 Key Features Explained
 
