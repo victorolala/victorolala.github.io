@@ -51,14 +51,15 @@ navLinks.forEach(link => {
 });
 
 // Smooth scroll for navigation links
+const NAV_SCROLL_OFFSET = 88;
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offsetTop = target.offsetTop - 80;
             window.scrollTo({
-                top: offsetTop,
+                top: target.offsetTop - NAV_SCROLL_OFFSET,
                 behavior: 'smooth'
             });
         }
@@ -80,31 +81,96 @@ document.addEventListener('DOMContentLoaded', () => {
     updateNavbarShadow();
 });
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// Section & scroll reveal transitions
+const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+const revealObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+);
+
+const sectionObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    },
+    { threshold: 0.06 }
+);
+
+function initScrollReveals() {
+    const groups = [
+        { selector: '.section-header, .about-header', variant: 'reveal-up' },
+        { selector: '.about-text-content', variant: 'reveal-up', delay: 80 },
+        { selector: '.contact-content-modern', variant: 'reveal-up', delay: 80 },
+        { selector: '.featured-card', variant: 'reveal-scale' },
+        { selector: '.skills-cloud', variant: 'reveal-up', delay: 120 },
+        { selector: '.highlight-item', variant: 'reveal-up', stagger: 100 },
+        { selector: '.duty-item', variant: 'reveal-left', stagger: 70 },
+        { selector: '.exp-card-mini', variant: 'reveal-up', stagger: 90 },
+        { selector: '.education-card-modern', variant: 'reveal-up', stagger: 90 },
+        { selector: '.contact-card', variant: 'reveal-scale', stagger: 80 },
+        { selector: '.footer', variant: 'reveal-up' }
+    ];
+
+    groups.forEach(({ selector, variant, stagger = 0, delay = 0 }) => {
+        document.querySelectorAll(selector).forEach((el, index) => {
+            el.classList.add(variant);
+            el.style.setProperty('--reveal-delay', `${delay + index * stagger}ms`);
+            revealObserver.observe(el);
+        });
     });
-}, observerOptions);
 
-// Observe elements for animation
+    document.querySelectorAll('section[id]:not(#home)').forEach((section) => {
+        section.classList.add('section-enter');
+        sectionObserver.observe(section);
+    });
+}
+
+function initHeroEntrance() {
+    const items = [
+        ...document.querySelectorAll('.hero-intro > *'),
+        document.querySelector('.hero-visual'),
+        ...document.querySelectorAll('.hero-actions > *')
+    ].filter(Boolean);
+
+    items.forEach((el, index) => {
+        el.classList.add('hero-enter');
+        el.style.setProperty('--enter-delay', `${80 + index * 90}ms`);
+    });
+
+    requestAnimationFrame(() => {
+        document.body.classList.add('is-loaded');
+    });
+}
+
+function initTransitions() {
+    if (motionQuery.matches) {
+        document.documentElement.classList.add('reduce-motion');
+        return;
+    }
+
+    initHeroEntrance();
+    initScrollReveals();
+}
+
+motionQuery.addEventListener('change', () => {
+    if (motionQuery.matches) {
+        document.documentElement.classList.add('reduce-motion');
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.featured-card, .skills-cloud, .exp-card-mini, .education-card-modern, .contact-card, .highlight-item, .about-text-content');
-    
-    animateElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-        observer.observe(el);
-    });
+    initTransitions();
 });
 
 // Active navigation link highlighting
@@ -112,7 +178,7 @@ const sections = document.querySelectorAll('section[id]');
 
 window.addEventListener('scroll', () => {
     const scrollPos = window.pageYOffset;
-    const navOffset = 120;
+    const navOffset = NAV_SCROLL_OFFSET;
     let current = sections[0]?.getAttribute('id') || '';
 
     sections.forEach((section) => {
