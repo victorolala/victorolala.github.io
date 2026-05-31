@@ -42,10 +42,33 @@ portfolio/
 ├── index.html          # Main HTML file
 ├── styles.css          # All styles and animations
 ├── script.js           # JavaScript functionality
+├── admin/              # Superadmin quote portal (not linked publicly)
+│   ├── index.html
+│   ├── admin.css
+│   ├── admin.js
+│   ├── config.example.js
+│   └── config.js       # Your password hash (gitignored — copy from example)
 ├── my_cv/              # CV/Resume folder
 │   └── Victor_Olala_Senior_Software_Engineer.pdf
 └── README.md           # This file
 ```
+
+## 🔐 Superadmin Quote Portal
+
+A private admin area for generating client **quotes** and **invoices** (line items, tax, discount, rich-text terms, live preview, PDF download).
+
+1. Open **`/admin/`** on your deployed site (e.g. `https://victorolala.github.io/portfolio/admin/`)
+2. Default password: **`changeme`** — change this before deploying:
+   - Copy `admin/config.example.js` to `admin/config.js`
+   - Generate a hash: `node -e "console.log(require('crypto').createHash('sha256').update('YOUR_PASSWORD').digest('hex'))"`
+   - Paste the hash into `config.js`
+3. **Quote Builder** — proposals with valid-until dates  
+4. **Invoice Builder** — bills with due date, payment status, optional quote reference  
+5. **Saved Quotes** — use **→ Invoice** to convert a quote into an invoice  
+6. Saved documents live in **browser localStorage** on the device you use  
+7. Use **Download PDF** to save the quote or invoice as a file (requires internet on first load for PDF/editor libraries)
+
+**Note:** This is client-side only (suitable for GitHub Pages). The URL is not linked from the portfolio; use a strong password and treat `config.js` as secret.
 
 ## 🎨 Customization
 

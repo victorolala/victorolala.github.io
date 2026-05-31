@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Superadmin — Quotes &amp; Invoices</title>
+    <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+    <script src="config.js"></script>
+</head>
+<body>
+    <!-- Login -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <h1>Superadmin Portal</h1>
+            <p class="subtitle">Sign in to create quotes and invoices.</p>
+            <form id="loginForm">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" autocomplete="current-password" required autofocus>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+            <p id="loginError" class="login-error" role="alert"></p>
+            <p class="subtitle" style="margin-top:1.5rem; margin-bottom:0; font-size:0.75rem;">
+                First time? Default password is <code>changeme</code> — copy <code>config.example.js</code> to <code>config.js</code> and set your own hash.
+            </p>
+        </div>
+    </div>
+
+    <!-- App -->
+    <div id="adminApp" class="admin-app admin-hidden">
+        <header class="admin-header">
+            <span class="admin-brand">VO · Quotes &amp; Invoices</span>
+            <div class="admin-header-actions">
+                <a href="../index.html" class="btn btn-ghost">← Portfolio</a>
+                <button type="button" id="logoutBtn" class="btn btn-secondary">Log out</button>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <nav class="admin-tabs" aria-label="Admin sections">
+                <button type="button" class="tab-btn active" data-tab="builder">Quote Builder</button>
+                <button type="button" class="tab-btn" data-tab="invoice-builder">Invoice Builder</button>
+                <button type="button" class="tab-btn" data-tab="saved">Saved Quotes</button>
+                <button type="button" class="tab-btn" data-tab="saved-invoices">Saved Invoices</button>
+                <button type="button" class="tab-btn" data-tab="settings">Settings</button>
+            </nav>
+
+            <!-- Builder -->
+            <section id="panel-builder" class="panel active">
+                <div class="quote-builder">
+                    <form id="quoteForm" class="quote-form" onsubmit="return false;">
+                        <div class="section-card">
+                            <h2 id="docDetailsHeading">Quote details</h2>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label id="docNumberLabel" for="quoteNumber">Quote #</label>
+                                    <input type="text" id="quoteNumber" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="issueDate">Issue date</label>
+                                    <input type="date" id="issueDate" required>
+                                </div>
+                                <div class="form-group quote-only-field">
+                                    <label for="validUntil">Valid until</label>
+                                    <input type="date" id="validUntil" required>
+                                </div>
+                                <div class="form-group invoice-only-field admin-hidden">
+                                    <label for="dueDate">Due date</label>
+                                    <input type="date" id="dueDate">
+                                </div>
+                                <div class="form-group invoice-only-field admin-hidden">
+                                    <label for="quoteReference">Quote reference</label>
+                                    <input type="text" id="quoteReference" placeholder="Q-202605-240">
+                                </div>
+                                <div class="form-group invoice-only-field admin-hidden">
+                                    <label for="paymentStatus">Payment status</label>
+                                    <select id="paymentStatus">
+                                        <option value="unpaid">Unpaid</option>
+                                        <option value="partial">Partially paid</option>
+                                        <option value="paid">Paid</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="currency">Currency</label>
+                                    <select id="currency">
+                                        <option value="USD">USD ($)</option>
+                                        <option value="KES">KES (KSh)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                        <option value="GBP">GBP (£)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section-card">
+                            <h2>Client</h2>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="clientName">Contact name</label>
+                                    <input type="text" id="clientName" placeholder="Jane Client">
+                                </div>
+                                <div class="form-group">
+                                    <label for="clientCompany">Company</label>
+                                    <input type="text" id="clientCompany" placeholder="Acme Inc.">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="clientEmail">Email</label>
+                                    <input type="email" id="clientEmail" placeholder="jane@acme.com">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section-card">
+                            <div class="line-items-toolbar">
+                                <h2>Line items</h2>
+                                <button type="button" id="addLineItem" class="btn btn-secondary">+ Add line</button>
+                            </div>
+                            <div class="line-items-table-wrap">
+                                <table class="line-items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Qty</th>
+                                            <th>Rate</th>
+                                            <th style="text-align:right">Amount</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="lineItemsBody"></tbody>
+                                </table>
+                            </div>
+                            <div class="form-grid" style="margin-top:1rem;">
+                                <div class="form-group">
+                                    <label for="taxPercent">Tax (%)</label>
+                                    <input type="number" id="taxPercent" min="0" step="0.01" value="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="discount">Discount (flat)</label>
+                                    <input type="number" id="discount" min="0" step="0.01" value="0">
+                                </div>
+                            </div>
+                            <div class="totals-row">
+                                <div class="total-line"><span>Subtotal</span><span id="formSubtotal">$0.00</span></div>
+                                <div class="total-line"><span>Tax</span><span id="formTax">$0.00</span></div>
+                                <div class="total-line grand"><span>Total</span><span id="formTotal">$0.00</span></div>
+                            </div>
+                        </div>
+
+                        <div class="section-card">
+                            <h2>Payment details</h2>
+                            <p class="section-hint">Shown on the quote for how clients should pay you.</p>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="paymentMethod">Payment method</label>
+                                    <input type="text" id="paymentMethod" placeholder="Bank transfer / M-Pesa">
+                                </div>
+                                <div class="form-group">
+                                    <label for="paymentAccountName">Account name</label>
+                                    <input type="text" id="paymentAccountName" placeholder="Victor Olala">
+                                </div>
+                                <div class="form-group">
+                                    <label for="paymentBankName">Bank name</label>
+                                    <input type="text" id="paymentBankName" placeholder="e.g. KCB, Equity">
+                                </div>
+                                <div class="form-group">
+                                    <label for="paymentAccountNumber">Account number</label>
+                                    <input type="text" id="paymentAccountNumber" placeholder="Account number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="paymentBranchSwift">Branch / SWIFT</label>
+                                    <input type="text" id="paymentBranchSwift" placeholder="Branch code or SWIFT (optional)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="paymentMpesa">M-Pesa</label>
+                                    <input type="text" id="paymentMpesa" placeholder="Till, Paybill, or phone number">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Payment instructions</label>
+                                    <div id="editorPaymentInstructions" class="rich-editor"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section-card">
+                            <h2>Payment terms</h2>
+                            <p class="section-hint">Deposits, milestones, due dates, and late-payment policy.</p>
+                            <div class="form-group full-width">
+                                <label>Payment terms</label>
+                                <div id="editorPaymentTerms" class="rich-editor"></div>
+                            </div>
+                        </div>
+
+                        <div class="section-card">
+                            <h2>Notes &amp; terms</h2>
+                            <p class="section-hint">Use the toolbar for bold text, headings, and bullet or numbered lists.</p>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label>Notes</label>
+                                    <div id="editorNotes" class="rich-editor"></div>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>General terms</label>
+                                    <div id="editorTerms" class="rich-editor"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quote-actions">
+                            <button type="button" id="saveQuote" class="btn btn-primary">Save quote</button>
+                            <button type="button" id="duplicateQuote" class="btn btn-secondary">Duplicate</button>
+                            <button type="button" id="newQuote" class="btn btn-ghost">New quote</button>
+                        </div>
+                    </form>
+
+                    <aside class="quote-preview-panel" aria-label="Quote preview">
+                        <div class="preview-toolbar">
+                            <div class="preview-toolbar-info">
+                                <span class="preview-live-dot" aria-hidden="true"></span>
+                                <div class="preview-toolbar-text">
+                                    <h3 class="preview-title">Live preview</h3>
+                                    <p class="preview-subtitle" id="previewToolbarMeta">Fill in details to preview</p>
+                                </div>
+                                <span class="preview-total-chip" id="previewToolbarTotal">$0.00</span>
+                            </div>
+                            <button type="button" id="downloadQuote" class="btn btn-download" title="Download quote as PDF">
+                                <svg class="btn-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12 3v12m0 0l4-4m-4 4l-4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="btn-label">Download PDF</span>
+                            </button>
+                        </div>
+
+                        <div class="preview-canvas">
+                            <div class="preview-page-label">A4 document</div>
+                            <div id="printArea" class="preview-document-scaler">
+                                <article class="quote-preview" id="quotePreview">
+                                    <div class="quote-preview-accent" aria-hidden="true"></div>
+                                    <div class="quote-preview-body">
+                                        <header class="quote-preview-header">
+                                            <div class="quote-preview-brand">
+                                                <div class="quote-logo">VO</div>
+                                                <div class="from">
+                                                    <h3 id="previewFromName">Victor Olala</h3>
+                                                    <p id="previewFromTitle"></p>
+                                                    <p id="previewFromEmail"></p>
+                                                    <p id="previewFromLocation"></p>
+                                                </div>
+                                            </div>
+                                            <div class="quote-preview-meta">
+                                                <span class="quote-badge" id="previewDocBadge">Quote</span>
+                                                <span class="invoice-status-badge admin-hidden" id="previewStatusBadge"></span>
+                                                <dl class="quote-meta-list">
+                                                    <div class="quote-meta-item">
+                                                        <dt id="previewNumberLabel">Quote #</dt>
+                                                        <dd id="previewQuoteNumber"></dd>
+                                                    </div>
+                                                    <div class="quote-meta-item">
+                                                        <dt>Issued</dt>
+                                                        <dd id="previewIssueDate"></dd>
+                                                    </div>
+                                                    <div class="quote-meta-item quote-only-preview">
+                                                        <dt>Valid until</dt>
+                                                        <dd id="previewValidUntil"></dd>
+                                                    </div>
+                                                    <div class="quote-meta-item invoice-only-preview admin-hidden">
+                                                        <dt>Due date</dt>
+                                                        <dd id="previewDueDate"></dd>
+                                                    </div>
+                                                    <div class="quote-meta-item invoice-only-preview admin-hidden" id="previewQuoteRefRow">
+                                                        <dt>Quote ref.</dt>
+                                                        <dd id="previewQuoteReference"></dd>
+                                                    </div>
+                                                    <div class="quote-meta-item">
+                                                        <dt>Currency</dt>
+                                                        <dd id="previewCurrency"></dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </header>
+
+                                        <div class="quote-preview-client-wrap">
+                                            <span class="quote-section-label">Bill to</span>
+                                            <div class="quote-preview-client" id="previewClient"></div>
+                                        </div>
+
+                                        <div class="quote-table-wrap">
+                                            <table class="quote-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Description</th>
+                                                        <th>Qty</th>
+                                                        <th>Rate</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="previewLineItems"></tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="quote-preview-footer">
+                                            <div class="quote-preview-totals">
+                                                <div class="row" id="previewSubtotalRow"><span>Subtotal</span><span id="previewSubtotal"></span></div>
+                                                <div class="row" id="previewTaxRow"><span>Tax</span><span id="previewTax"></span></div>
+                                                <div class="row" id="previewDiscountRow"><span>Discount</span><span id="previewDiscount"></span></div>
+                                                <div class="row grand"><span id="previewTotalLabel">Total due</span><span id="previewTotal"></span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="quote-preview-payment" id="previewPaymentBlock">
+                                            <h5>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                                    <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                                    <path d="M2 10h20" stroke="currentColor" stroke-width="2"/>
+                                                </svg>
+                                                Payment details
+                                            </h5>
+                                            <div id="previewPayment" class="payment-grid"></div>
+                                            <div id="previewPaymentInstructions" class="rich-content payment-instructions-rich admin-hidden"></div>
+                                        </div>
+
+                                        <div class="quote-preview-payment-terms" id="previewPaymentTermsBlock">
+                                            <h5>Payment terms</h5>
+                                            <div id="previewPaymentTerms" class="rich-content"></div>
+                                        </div>
+
+                                        <div class="quote-preview-notes" id="previewNotesBlock">
+                                            <h5>Notes</h5>
+                                            <div id="previewNotes" class="rich-content"></div>
+                                        </div>
+                                        <div class="quote-preview-notes" id="previewTermsBlock">
+                                            <h5>General terms</h5>
+                                            <div id="previewTerms" class="rich-content"></div>
+                                        </div>
+
+                                        <footer class="quote-preview-thanks">
+                                            Thank you for your business.
+                                        </footer>
+                                        <div class="quote-doc-footer">
+                                            <span id="previewDocFooter"></span>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- Saved -->
+            <section id="panel-saved" class="panel">
+                <div class="section-card">
+                    <h2>Saved quotes</h2>
+                    <p style="color:var(--text-tertiary); font-size:0.85rem; margin-bottom:1rem;">
+                        Quotes are stored in this browser only (localStorage).
+                    </p>
+                    <div id="savedQuotesList" class="saved-list"></div>
+                </div>
+            </section>
+
+            <!-- Saved Invoices -->
+            <section id="panel-saved-invoices" class="panel">
+                <div class="section-card">
+                    <h2>Saved invoices</h2>
+                    <p style="color:var(--text-tertiary); font-size:0.85rem; margin-bottom:1rem;">
+                        Invoices are stored in this browser only (localStorage).
+                    </p>
+                    <div id="savedInvoicesList" class="saved-list"></div>
+                </div>
+            </section>
+
+            <!-- Settings -->
+            <section id="panel-settings" class="panel">
+                <div class="section-card">
+                    <h2>Your business profile</h2>
+                    <p class="settings-note" style="margin-bottom:1rem;">
+                        Shown on every quote preview. Edit defaults in <code>admin/admin.js</code> (<code>BUSINESS</code> and <code>DEFAULT_PAYMENT</code>).
+                    </p>
+                    <p><strong id="bizName"></strong></p>
+                    <p id="bizTitle" style="color:var(--text-secondary);"></p>
+                    <p id="bizEmail" style="color:var(--text-tertiary); font-size:0.9rem;"></p>
+                    <p id="bizLocation" style="color:var(--text-tertiary); font-size:0.9rem;"></p>
+                </div>
+                <div class="section-card">
+                    <h2>Security</h2>
+                    <p class="settings-note">
+                        This portal runs entirely in the browser (static hosting). The password hash lives in
+                        <code>admin/config.js</code> (gitignored). Copy <code>config.example.js</code>, generate a new hash, and never commit real credentials.
+                        <br><br>
+                        Access URL: <code>/admin/</code> — not linked from the public portfolio.
+                        <br><br>
+                        Generate password hash:
+                        <br>
+                        <code>node -e "console.log(require('crypto').createHash('sha256').update('YOUR_PASSWORD').digest('hex'))"</code>
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="toast admin-hidden" role="status" aria-live="polite"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

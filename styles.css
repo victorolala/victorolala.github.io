@@ -1290,6 +1290,10 @@ body {
     .about-paragraph {
         font-size: 1rem;
     }
+
+    .experiences-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
