@@ -17,6 +17,7 @@
         })();
     </script>
     <title>Superadmin — Quotes &amp; Invoices</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="admin.css">
     <script src="config.js"></script>
@@ -25,6 +26,7 @@
     <!-- Login -->
     <div id="loginScreen" class="login-screen">
         <div class="login-card">
+            <img src="../assets/logo.svg" alt="" class="login-logo" width="56" height="56">
             <h1>Superadmin Portal</h1>
             <p class="subtitle">Sign in to create quotes and invoices.</p>
             <form id="loginForm">
@@ -42,7 +44,10 @@
     <!-- App -->
     <div id="adminApp" class="admin-app admin-hidden">
         <header class="admin-header">
-            <span class="admin-brand">VO · Quotes &amp; Invoices</span>
+            <div class="admin-brand">
+                <img src="../assets/logo.svg" alt="" class="admin-brand-mark" width="34" height="34">
+                <span>Quotes &amp; Invoices</span>
+            </div>
             <div class="admin-header-actions">
                 <a href="../" class="btn btn-ghost">← Portfolio</a>
                 <button type="button" id="logoutBtn" class="btn btn-secondary">Log out</button>
@@ -251,7 +256,9 @@
                                     <div class="quote-preview-body">
                                         <header class="quote-preview-header">
                                             <div class="quote-preview-brand">
-                                                <div class="quote-logo">VO</div>
+                                                <div class="quote-logo">
+                                                    <img src="../assets/favicon.svg" alt="VO" width="28" height="28">
+                                                </div>
                                                 <div class="from">
                                                     <h3 id="previewFromName">Victor Olala</h3>
                                                     <p id="previewFromTitle"></p>
