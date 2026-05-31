@@ -111,24 +111,26 @@ document.addEventListener('DOMContentLoaded', () => {
 const sections = document.querySelectorAll('section[id]');
 
 window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (window.pageYOffset >= sectionTop - 200) {
+    const scrollPos = window.pageYOffset;
+    const navOffset = 120;
+    let current = sections[0]?.getAttribute('id') || '';
+
+    sections.forEach((section) => {
+        const sectionTop = section.offsetTop - navOffset;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
             current = section.getAttribute('id');
         }
     });
-    
-    navLinks.forEach(link => {
+
+    navLinks.forEach((link) => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
         }
     });
-});
+}, { passive: true });
 
 // Add typing effect to hero code snippet (optional enhancement)
 const codeSnippet = document.querySelector('.code-snippet');
@@ -144,15 +146,35 @@ if (codeSnippet) {
     }, 800);
 }
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+// Subtle parallax on hero background only (desktop) — never shift hero content
+const heroBackground = document.querySelector('.hero-background');
+const heroSection = document.querySelector('.hero');
+const canParallax = window.matchMedia('(min-width: 1025px) and (prefers-reduced-motion: no-preference)');
+
+function resetHeroMotion() {
+    if (heroSection) {
+        heroSection.style.transform = '';
+        heroSection.style.opacity = '';
     }
-});
+    if (heroBackground) {
+        heroBackground.style.transform = '';
+    }
+}
+
+window.addEventListener('scroll', () => {
+    if (!canParallax.matches) {
+        resetHeroMotion();
+        return;
+    }
+
+    const scrolled = window.pageYOffset;
+    if (heroBackground && scrolled < window.innerHeight) {
+        heroBackground.style.transform = `translateY(${scrolled * 0.25}px)`;
+    }
+}, { passive: true });
+
+canParallax.addEventListener('change', resetHeroMotion);
+document.addEventListener('DOMContentLoaded', resetHeroMotion);
 
 // Add hover effect to skill tags
 document.querySelectorAll('.skill-tag-modern').forEach(tag => {

@@ -586,6 +586,8 @@ body {
 .about-section {
     background: var(--bg-primary);
     position: relative;
+    z-index: 1;
+    padding-top: 5rem;
 }
 
 .about-content-wrapper {
@@ -1186,7 +1188,7 @@ body {
     .hero {
         min-height: auto;
         align-items: flex-start;
-        padding: 6.5rem 0 2.5rem;
+        padding: 6.5rem 0 3.5rem;
     }
 
     .hero-content {
