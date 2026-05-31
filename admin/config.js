@@ -5,5 +5,5 @@
  *   node -e "console.log(require('crypto').createHash('sha256').update('YOUR_PASSWORD').digest('hex'))"
  */
 window.ADMIN_CONFIG = {
-    passwordHash: '057ba03d6c44104863dc7361fe4578965d1887360f90a0895882e58a6248fc86'
+    passwordHash: '054eff6ef923797ac42d1ea652d4d204fef31a08b449a43c74e58047a0e091e6'
 };
