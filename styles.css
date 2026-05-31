@@ -309,8 +309,25 @@ body {
 .hero-content {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
-    gap: 4rem;
-    align-items: center;
+    grid-template-rows: auto auto;
+    gap: 2.5rem 4rem;
+    align-items: start;
+}
+
+.hero-intro {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.hero-visual {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+}
+
+.hero-actions {
+    grid-column: 1;
+    grid-row: 2;
 }
 
 .hero-badge {
@@ -1169,31 +1186,26 @@ body {
     .hero {
         min-height: auto;
         align-items: flex-start;
-        padding: 7rem 0 3rem;
+        padding: 6.5rem 0 2.5rem;
     }
 
     .hero-content {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1.75rem;
     }
 
-    /* Reorder: show code console after intro, before stats/buttons */
-    .hero-text {
-        display: contents;
+    .hero-intro,
+    .hero-visual,
+    .hero-actions {
+        grid-column: 1;
+        grid-row: auto;
     }
-
-    .hero-badge { order: 1; }
-    .hero-title { order: 2; }
-    .hero-description { order: 3; }
 
     .hero-visual {
-        order: 4;
+        align-self: stretch;
         width: 100%;
     }
-
-    .hero-stats { order: 5; }
-    .hero-buttons { order: 6; }
 
     .hero-card {
         max-width: none;
@@ -1203,6 +1215,21 @@ body {
     .hero-description {
         max-width: none;
         margin-bottom: 0;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .hero-title {
+        margin-bottom: 1rem;
+    }
+
+    .hero-badge {
+        margin-bottom: 1rem;
+    }
+
+    .hero-stats {
+        margin-bottom: 1.5rem;
+        padding: 1.25rem 0;
     }
 
     .featured-header {
@@ -1374,20 +1401,22 @@ body {
 
     .hero-stats {
         flex-direction: column;
-        gap: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .hero-visual {
-        margin-bottom: 0.5rem;
+        gap: 1.25rem;
+        margin-bottom: 1.25rem;
     }
 
     .hero-card {
-        padding: 1.25rem;
+        padding: 1.15rem;
+    }
+
+    .card-header {
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.75rem;
     }
 
     .code-preview {
-        font-size: 0.85rem;
+        font-size: 0.8125rem;
+        line-height: 1.55;
     }
 
     .education-grid-modern {
