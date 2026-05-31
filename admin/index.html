@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
+    <script>
+        (function () {
+            var path = location.pathname;
+            if (/\/index\.html?$/i.test(path)) {
+                history.replaceState(
+                    null,
+                    '',
+                    path.replace(/\/index\.html?$/i, '/') + location.search + location.hash
+                );
+            }
+        })();
+    </script>
     <title>Superadmin — Quotes &amp; Invoices</title>
     <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="admin.css">
@@ -32,7 +44,7 @@
         <header class="admin-header">
             <span class="admin-brand">VO · Quotes &amp; Invoices</span>
             <div class="admin-header-actions">
-                <a href="../index.html" class="btn btn-ghost">← Portfolio</a>
+                <a href="../" class="btn btn-ghost">← Portfolio</a>
                 <button type="button" id="logoutBtn" class="btn btn-secondary">Log out</button>
             </div>
         </header>
